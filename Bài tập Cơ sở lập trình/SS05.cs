@@ -148,7 +148,39 @@ namespace Bài_tập_Cơ_sở_lập_trình
                 Print_First_N_Primes(limit);
             }
         }
-        public static void EX05() { }
-        public static void EX06() { }
-    } }
+        public static void EX05() 
+        {
+        static bool IsPerfectNumber(int number)
+    {
+        int sum = 0;
+        // Tính tổng các ước số (trừ chính nó)
+        for (int i = 1; i <= number / 2; i++)
+        {
+            if (number % i == 0) // Nếu i là ước của number
+            {
+                sum += i; // Cộng i vào tổng
+            }
+        }
+        // Kiểm tra nếu tổng các ước bằng chính số đó
+        return sum == number;
+    }
+
+    // Hàm chính
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Here are all perfect numbers that less than 1000: ";
+        for (int i = 1; i < 1000; i++)
+        {
+            if (IsPerfectNumber(i))
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+        }
+        public static void EX06() 
+        {
+        }
+    } 
+    }
 
