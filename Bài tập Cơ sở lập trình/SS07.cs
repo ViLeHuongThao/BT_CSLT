@@ -79,19 +79,96 @@ namespace Bài_tập_Cơ_sở_lập_trình
                 }
                 return max;
             }
-            static int TimMin(int[,] a, ref int min)
+             static void TimMinDong(int[,] a)
             {
-
-                for (int i = 0; i < a.GetLength(0); i++)
+               int min = a[0, 0];
+               Console.Write("Nhap dong can tim Min: ");
+               int dong = int.Parse(Console.ReadLine());
+               for (int i = 0; i < a.GetLength(0); i++)
+            {
+            for (int j = 0; j < a.GetLength(1); j++)
+            {
+             if (dong - 1 == i)
+             {
+                 if (min > a[i, j])
+                     min = a[i, j];
+             }
+            }
+            }
+             Console.WriteLine($"Gia tri nho nhat cua dong {dong} la: {min}");
+           }
+                static void TimMinCot(int[,] a)
+        {
+            int min = a[0, 0];
+            Console.Write("Nhap cot can tim Min: ");
+            int cot = int.Parse(Console.ReadLine());
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
                 {
-                    for (int j = 0; j < a.GetLength(1); j++)
+                    if (cot - 1 == j)
                     {
-                        if (a[i, j] < min) { min = a[i, j]; }
+                        if (min > a[i, j])
+                            min = a[i, j];
                     }
                 }
-                return min;
             }
-            static void EX01()
+            Console.WriteLine($"Gia tri nho nhat cua cot {cot} la: {min}");
+        }
+        static int[,] ChuyenVi(int[,] a)
+        {
+            int rows = a.GetLength(0); // số hàng của ma trận a
+            int cols = a.GetLength(1); // số cột của ma trận a
+            int[,] MaTranChuyenVi = new int[cols, rows];
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < cols; j++)
+                { MaTranChuyenVi[j, i] = a[i, j]; }
+            }
+            return MaTranChuyenVi;
+        }
+        static void InMaTranChuyenVi(int[,] MaTranChuyenVi)
+        {
+            for (int i = 0; i < MaTranChuyenVi.GetLength(1); i++)
+            {
+                for (int j = 0; j < MaTranChuyenVi.GetLength(0); j++)
+                {
+                    Console.Write(MaTranChuyenVi[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        static void DuongCheoChinh(int[,] a)
+        {
+            int x = a.GetLength(0);
+            int y = a.GetLength(1);
+            if (x != y)
+            {
+                Console.WriteLine("Ma tran khong vuong nen khong co duong cheo chinh");
+                return;
+            }
+            for (int i = 0;i<x; i++)
+            {
+                Console.Write(a[i, i] + " ");
+            }    
+        }
+        static void DuongCheoPhu(int[,] a)
+        {
+            int n = a.GetLength(0); // Số hàng
+            int m = a.GetLength(1); // Số cột
+            if (n != m)
+            {
+                Console.WriteLine("Matrix is not square, no secondary diagonal.");
+                return;
+            }
+            for (int i = 0; i < n; i++) 
+            {
+                Console.Write(a[i, n - i - 1] + "\t");
+                //dòng 0 thì cột n-1, dòng n-1 thì cột 0
+            }
+        }
+            static void Main()
             {
                 int[,] a;
                 Console.Write("Nhap so dong: ");
@@ -113,8 +190,14 @@ namespace Bài_tập_Cơ_sở_lập_trình
                 Console.WriteLine("So lon nhat trong mang la: " + max);
 
                 int min = int.MaxValue;
-                TimMin(a, ref min);
-                Console.WriteLine("So nho nhat trong mang la: " + min);
+                TimMinDong(a);
+                TimMinCot(a);
+
+                ChuyenVi(a);
+                InMaTranChuyenVi(a);
+
+                DuongCheoChinh(a);
+                DuongCheoPhu(a);
             }
         }
     }
